@@ -17,6 +17,12 @@ public class Comment_s implements Services <Comment>
     {
         this.cnx = cnx;
     }
+    /**
+     * Adds a new comment to the database.
+     * 
+     * @param c The Comment object containing the comment details to be added
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     public void add(Comment c) throws SQLException
     {
         String qry= "INSERT INTO `comment`(`contenu_comment`, `date_comment`, `post_id`) VALUES (?, ?, ?)";
@@ -51,6 +57,12 @@ public class Comment_s implements Services <Comment>
         }
         return commentList;
     }
+    /**
+     * Deletes a comment from the database based on the provided ID.
+     * 
+     * @param id The unique identifier of the comment to be deleted
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     @Override
     public void delete(int id) throws SQLException
     {
@@ -76,6 +88,13 @@ public class Comment_s implements Services <Comment>
             throw e;
         }
     }
+    /**
+     * Retrieves a Post object from the database based on the given ID.
+     * 
+     * @param id The unique identifier of the post to retrieve
+     * @return A Post object containing the post details if found, or null if not found
+     * @throws SQLException If a database access error occurs
+     */
     private Post getPostById(int id)
     {
         Post post = null;
