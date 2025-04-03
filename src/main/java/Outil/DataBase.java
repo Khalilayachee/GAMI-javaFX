@@ -29,6 +29,16 @@ public class DataBase {
         }
     }
 
+    /**
+     * Returns the singleton instance of the DataBase class.
+     * 
+     * This method implements the Singleton pattern to ensure only one instance
+     * of the DataBase class is created and used throughout the application.
+     * If the instance doesn't exist, it creates a new one; otherwise, it returns
+     * the existing instance.
+     * 
+     * @return The singleton instance of the DataBase class
+     */
     public static DataBase getInstance() {
         if (instance == null) {
             return instance = new DataBase();
@@ -47,6 +57,18 @@ public class DataBase {
     private static final String APP_DATA_DIR = System.getenv("LOCALAPPDATA") + "\\Programs";
     private static final File DIR = new File(APP_DATA_DIR, "ChaTTY");
 
+    /**
+     * Creates a responses file with predefined chat responses in JSON format.
+     * 
+     * This method performs the following operations:
+     * 1. Determines the application data path.
+     * 2. Creates a 'ChaTTY' directory if it doesn't exist.
+     * 3. Initializes a map with predefined chat responses.
+     * 4. Converts the map to JSON format.
+     * 5. Writes the JSON data to a 'responses.json' file in the 'ChaTTY' directory.
+     * 
+     * @throws IOException If an I/O error occurs while writing the file.
+     */
     public static void createResponsesFile() throws IOException {
         String appDataPath = System.getenv("LOCALAPPDATA") + "\\Programs";
 
@@ -70,6 +92,15 @@ public class DataBase {
         System.out.println("Create Database: " + (!doesNotExist()));
     }
 
+    /**
+     * Retrieves the File object representing the responses.json file.
+     * 
+     * This method constructs the path to the responses.json file
+     * in the ChaTTY program directory within the user's local
+     * application data folder.
+     * 
+     * @return File object pointing to the responses.json file
+     */
     public static File getResponsesFile() {
         String appDataPath = System.getenv("LOCALAPPDATA") + "\\Programs";
         File dir = new File(appDataPath, "ChaTTY");
