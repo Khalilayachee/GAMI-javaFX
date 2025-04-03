@@ -12,6 +12,15 @@ import java.util.Date;
 import java.util.List;
 
 public class Main {
+    /**
+     * This method demonstrates the creation, retrieval, modification, and deletion of posts in a database.
+     * It serves as a main entry point to showcase CRUD operations on Post objects using a Post_s service.
+     * 
+     * @param args Command line arguments (not used in this method)
+     * @return void This method does not return a value
+     * @throws SQLException If there's an error in database operations
+     * @throws ParseException If there's an error parsing the date string
+     */
     public static void main(String[] args) {
         DataBase d = DataBase.getInstance();
         Post_s postService = null; // Déclaration à l'extérieur du bloc try
