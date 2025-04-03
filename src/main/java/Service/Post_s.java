@@ -15,6 +15,15 @@ public class Post_s implements Services <Post>
         this.cnx = cnx;
     }
     public Post_s() {}
+    /**
+     * Adds a new post to the database.
+     * 
+     * This method inserts a new post into the 'post' table of the database using the provided Post object.
+     * It sets the title, content, publication date, file path, likes, and dislikes of the post.
+     * 
+     * @param p The Post object containing the details of the post to be added
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     @Override
     public void add(Post p) throws SQLException
     {
@@ -63,6 +72,12 @@ public class Post_s implements Services <Post>
         }
         return postList;
     }
+    /**
+     * Deletes a post from the database based on the provided ID.
+     * 
+     * @param id The unique identifier of the post to be deleted
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     @Override
     public void delete(int id) throws SQLException
     {
@@ -91,6 +106,12 @@ public class Post_s implements Services <Post>
             throw e;
         }
     }
+    /**
+     * Deletes a post from the database based on its title.
+     * 
+     * @param titre The title of the post to be deleted
+     * @throws SQLException If a database access error occurs
+     */
     public void deleteByTitre(String titre) throws SQLException {
         String query = "DELETE FROM post WHERE titre = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
@@ -106,6 +127,13 @@ public class Post_s implements Services <Post>
             preparedStatement.executeUpdate();
         }
     }
+    /**
+     * Updates the number of dislikes for a post with the specified title.
+     * 
+     * @param titre The title of the post to update
+     * @param newDislikes The new number of dislikes to set for the post
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     public void updateDislikes(String titre, int newDislikes) throws SQLException {
         String query = "UPDATE post SET dislikes = ? WHERE titre = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
@@ -134,6 +162,16 @@ public class Post_s implements Services <Post>
         }
         return comments;
     }
+    /**
+     * Adds a comment to a post in the database.
+     * 
+     * This method inserts a new comment associated with a specific post into the database.
+     * It uses a prepared statement to safely insert the comment content and post ID.
+     * 
+     * @param post The Post object to which the comment is being added
+     * @param comment The Comment object containing the content to be added
+     * @throws SQLException If there's an error during the database operation or if the insertion fails
+     */
     public void addComment(Post post, Comment comment) throws SQLException {
         String query = "INSERT INTO comment (contenu_comment, post_id) VALUES (?, ?)";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
@@ -159,6 +197,13 @@ public class Post_s implements Services <Post>
         }
         return titres;
     }
+    /**
+     * Retrieves a Post object from the database by its title.
+     * 
+     * @param titre The title of the post to retrieve
+     * @return The Post object if found, or null if no post with the given title exists
+     * @throws SQLException If a database access error occurs
+     */
     public Post getByTitre(String titre) throws SQLException {
         String query = "SELECT * FROM post WHERE titre = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
@@ -199,6 +244,12 @@ public class Post_s implements Services <Post>
         }
         return comments;
     }
+    /**
+     * Deletes a comment from the database based on the provided comment ID.
+     * 
+     * @param commentId The unique identifier of the comment to be deleted
+     * @throws SQLException If a database access error occurs or this method is called on a closed connection
+     */
     public void deleteComment(int commentId) throws SQLException {
         String query = "DELETE FROM comment WHERE id = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
